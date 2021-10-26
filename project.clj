@@ -8,6 +8,14 @@
                  [integrant "0.8.0"]
                  [http-kit "2.3.0"]
                  [diehard "0.10.4"]]
+  :deploy-repositories [["snapshots" {:url "https://clojars.org/repo"
+                                      :username :env/clojars_username
+                                      :password :env/clojars_password
+                                      :sign-releases false}]
+                        ["releases"  {:url "https://clojars.org/repo"
+                                      :username :env/clojars_username
+                                      :password :env/clojars_password
+                                      :sign-releases false}]]
   :profiles {:dev [:project/dev :profiles/dev]
              :profiles/dev {}
              :project/dev {:plugins [[jonase/eastwood "0.9.9"]
