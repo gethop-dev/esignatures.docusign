@@ -1,4 +1,4 @@
-(defproject magnet/esignatures.docusign "0.1.0"
+(defproject magnet/esignatures.docusign "0.1.1-SNAPSHOT"
   :description "A library for interacting with the DocuSign eSignature API"
   :url "https://github.com/magnetcoop/esignatures.docusign"
   :license {:name "Mozilla Public License 2.0"
