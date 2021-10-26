@@ -6,7 +6,8 @@
   (:require [buddy.sign.jwt :as jwt]
             [clojure.string :as str]
             [magnet.esignatures.util :as util])
-  (:import [java.security KeyFactory]
+  (:import [java.lang String]
+           [java.security KeyFactory]
            [java.security.spec PKCS8EncodedKeySpec]
            [java.util Base64]))
 
@@ -19,7 +20,7 @@
 
 (defn load-private-key [plain-private-key]
   (let [clean-key (clean-private-key plain-private-key)
-        buffer (.decode (Base64/getDecoder) clean-key)
+        buffer (.decode (Base64/getDecoder) ^String clean-key)
         spec (PKCS8EncodedKeySpec. buffer)
         factory (KeyFactory/getInstance "RSA")]
     (.generatePrivate factory spec)))
