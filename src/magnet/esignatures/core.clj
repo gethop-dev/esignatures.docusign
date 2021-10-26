@@ -11,9 +11,9 @@
 (s/def ::email string?)
 (s/def ::file-extension string?)
 (s/def ::stream #(instance? InputStream %))
-(s/def ::document (s/keys :req-n [::name
-                                  ::file-extension
-                                  ::stream]))
+(s/def ::document (s/keys :req-un [::name
+                                   ::file-extension
+                                   ::stream]))
 (s/def ::documents (s/coll-of ::document :min-count 1))
 
 (s/def ::signer (s/keys :req-un [::id
