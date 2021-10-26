@@ -100,7 +100,7 @@
                             :body (merge view opts)}
                            retry-config)]
       (if (and (<= 200 status 299) (:url body))
-        {:success? true :id (:url body)}
+        {:success? true :url (:url body)}
         {:success? false
          :reason :request-failed
          :error-details {:body body}}))
