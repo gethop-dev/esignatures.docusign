@@ -2,7 +2,7 @@
 ;; License, v. 2.0. If a copy of the MPL was not distributed with this
 ;; file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-(ns magnet.esignatures.util
+(ns coop.magnet.esignatures.util
   (:require [cheshire.core :as json]
             [diehard.core :as dh]
             [org.httpkit.client :as http])

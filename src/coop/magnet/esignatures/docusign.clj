@@ -2,15 +2,15 @@
 ;; License, v. 2.0. If a copy of the MPL was not distributed with this
 ;; file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-(ns magnet.esignatures.docusign
+(ns coop.magnet.esignatures.docusign
   (:require [integrant.core :as ig]
-            [magnet.esignatures.docusign.api :as api]
-            [magnet.esignatures.docusign.oauth :as oauth]))
+            [coop.magnet.esignatures.docusign.api :as api]
+            [coop.magnet.esignatures.docusign.oauth :as oauth]))
 
 (defn init-record [config]
   (-> config
       (update-in [:auth-config :private-key] oauth/load-private-key)
       (api/map->DocuSign)))
 
-(defmethod ig/init-key :magnet.esignature/docusign [_ config]
+(defmethod ig/init-key :coop.magnet.esignature/docusign [_ config]
   (init-record config))

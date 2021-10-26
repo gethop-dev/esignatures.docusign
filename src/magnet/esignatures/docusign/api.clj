@@ -2,13 +2,13 @@
 ;; License, v. 2.0. If a copy of the MPL was not distributed with this
 ;; file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-(ns magnet.esignatures.docusign.api
+(ns coop.magnet.esignatures.docusign.api
   (:require [clojure.java.io :as io]
             [clojure.set :as set]
             [clojure.spec.alpha :as s]
-            [magnet.esignatures.core :as core]
-            [magnet.esignatures.docusign.oauth :as oauth]
-            [magnet.esignatures.util :as util])
+            [coop.magnet.esignatures.core :as core]
+            [coop.magnet.esignatures.docusign.oauth :as oauth]
+            [coop.magnet.esignatures.util :as util])
   (:import [java.io ByteArrayOutputStream]
            [java.io FileInputStream]
            [java.util Base64]))
@@ -67,6 +67,7 @@
                             :headers {"Authorization" (str "Bearer " access-token)}
                             :body (merge api-envelope opts)}
                            retry-config)]
+      (prn body)
       (if (and (<= 200 status 299) (:envelopeId body))
         {:success? true :id (:envelopeId body)}
         {:success? false

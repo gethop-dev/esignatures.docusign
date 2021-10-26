@@ -20,6 +20,6 @@
              :profiles/dev {}
              :project/dev {:plugins [[jonase/eastwood "0.9.9"]
                                      [lein-cljfmt "0.8.0"]]}
-             :repl {:repl-options {:init-ns magnet.esignatures.core
+             :repl {:repl-options {:init-ns coop.magnet.esignatures.core
                                    :host "0.0.0.0"
                                    :port 4001}}})
