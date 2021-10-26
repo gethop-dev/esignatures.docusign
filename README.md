@@ -28,7 +28,7 @@ A Library for interacting with the [Docusign eSignature API](https://developers.
 
 To use this library add the following key to your configuration:
 
-`:magnet.esignature/docusign`
+`:coop.magnet.esignatures/docusign`
 
 This key expects a configuration map with two mandatory keys
 These are the mandatory keys:
@@ -42,7 +42,7 @@ These are the mandatory keys:
 * `:account-id`: DocuSign account's ID.
 
 These are the optional keys:
-* `:timeout`: Timeout value (in milli-seconds) for an connection attempt with Grafana.
+* `:timeout`: Timeout value (in milli-seconds) for an connection attempt with DocuSign API.
 * `:max-retries`: If the connection attempt fails, how many retries we want to attempt before giving up.
 * `:backoff-ms`: This is a vector in the form [initial-delay-ms max-delay-ms multiplier] to control the delay between each retry. The delay for nth retry will be (max (* initial-delay-ms n multiplier) max-delay-ms). If multiplier is not specified (or if it is nil), a multiplier of 2 is used. All times are in milli-seconds.
 
@@ -52,7 +52,7 @@ Key initialization returns a `DocuSign` record that can be used to perform the D
 
 Basic configuration:
 ```edn
-  :magnet.esignatures/docusign
+  :coop.magnet.esignatures/docusign
    {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
@@ -63,7 +63,7 @@ Basic configuration:
 
 Configuration with custom request retry policy:
 ```edn
-  :magnet.esignatures/docusign
+  :coop.magnet.esignatures/docusign
    {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
@@ -83,8 +83,7 @@ If you are using the library as part of a [Duct](https://github.com/duct-framewo
 First we require the relevant namespaces:
 
 ```clj
-user> (require '[integrant.core :as ig]
-               '[magnet.esignature.docusign.api :as api])
+user> (require '[integrant.core :as ig])
 nil
 user>
 ```
@@ -92,7 +91,7 @@ user>
 Next we create the configuration var holding the DocuSign integration configuration details:
 
 ```clj
-user> (def config :magnet.esignatures/docusign
+user> (def config :coop.magnet.esignatures/docusign
                   {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                                  :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                  :auth-service-uri "https://account-d.docusign.com"
@@ -103,33 +102,33 @@ user> (def config :magnet.esignatures/docusign
 user>
 ```
 
-Now that we have all pieces in place, we can initialize the `:magnet.esignature/docusign` Integrant key to get a `DocuSign` record. As we are doing all this from the REPL, we have to manually require `magnet.esignature.docusign` namespace, where the `init-key` multimethod for that key is defined (this is not needed when Duct takes care of initializing the key as part of the application start up):
+Now that we have all pieces in place, we can initialize the `:coop.magnet.esignature/docusign` Integrant key to get a `DocuSign` record. As we are doing all this from the REPL, we have to manually require `magnet.esignature.docusign` namespace, where the `init-key` multimethod for that key is defined (this is not needed when Duct takes care of initializing the key as part of the application start up):
 
 ``` clj
-user> (require '[magnet.esignatures.docusign :as docusign])
+user> (require '[coop.magnet.esignatures.docusign :as docusign])
 nil
 user>
 ```
 
-And we finally initialize the key with the configuration defined above, to get our `Grafana` record:
+And we finally initialize the key with the configuration defined above, to get our `DocuSign` record:
 
 ``` clj
-user> (def ds-record (ig/init-key :magnet.dashboard-manager/grafana config))
+user> (def ds-record (ig/init-key :coop.magnet.esignatures/docusign config))
 #'user/ds-record
 user> ds-record
-#magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
-                                                    :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
-                                                    :auth-service-uri "https://account-d.docusign.com"
-                                                    :private-key "DocuSign Application's Private RSA Key"}
-                                      :base-url "https://demo.docusign.com"
-                                      :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
+#coop.magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
+                                                         :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
+                                                         :auth-service-uri "https://account-d.docusign.com"
+                                                         :private-key "DocuSign Application's Private RSA Key"}
+                                           :base-url "https://demo.docusign.com"
+                                           :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 user>
 ```
 
 #### Not using Duct
 
 ```clj
-user> (require '[magnet.esignatures.docusign :as docusign])
+user> (require '[coop.magnet.esignatures.docusign :as docusign])
 user> (docusign/init-record {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                                                     :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                                     :auth-service-uri "https://account-d.docusign.com"
@@ -137,12 +136,12 @@ user> (docusign/init-record {:auth-config {:integration-key "5ff3dade-dd8e-4da4-
                              :base-url "https://demo.docusign.com"
                              :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"})
 
-#magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
-                                                    :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
-                                                    :auth-service-uri "https://account-d.docusign.com"
-                                                    :private-key "DocuSign Application's Private RSA Key"}
-                                      :base-url "https://demo.docusign.com"
-                                      :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
+#coop.magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
+                                                         :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
+                                                         :auth-service-uri "https://account-d.docusign.com"
+                                                         :private-key "DocuSign Application's Private RSA Key"}
+                                           :base-url "https://demo.docusign.com"
+                                           :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 ```
 
 Now that we have our `DocuSign` record, we are ready to use the methods defined by the protocols defined in `magnet.esignatures.core` namespace.
@@ -165,12 +164,12 @@ Beware that these are only the minimal set of parameters needed to create an env
 An example of creating a sample envelope:
 
 ``` clojure
-magnet.esignatures.docusign> (create-envelope ds-record {:documents [{:name "test"
-                                                                      :file-extension "pdf"
-                                                                      :stream test-file}]
-                                                         :signers [{:id "1"
-                                                                    :email "lucas.sousa@magnet.coop"
-                                                                    :name "Lucas Sousa"}]})
+coop.magnet.esignatures.docusign> (create-envelope ds-record {:documents [{:name "test"
+                                                                           :file-extension "pdf"
+                                                                           :stream test-file}]
+                                                              :signers [{:id "1"
+                                                                         :email "lucas.sousa@magnet.coop"
+                                                                         :name "Lucas Sousa"}]})
 {:success? true, :id "98a4c44b-55e3-4694-8ebd-a438060471ba"}
 ```
 
