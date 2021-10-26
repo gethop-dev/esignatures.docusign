@@ -10,10 +10,10 @@
             [coop.magnet.esignatures.docusign.oauth :as oauth]
             [coop.magnet.esignatures.util :as util])
   (:import [java.io ByteArrayOutputStream]
-           [java.io FileInputStream]
+           [java.io BufferedInputStream]
            [java.util Base64]))
 
-(defn input-stream->base64 [^FileInputStream input-stream]
+(defn input-stream->base64 [^BufferedInputStream input-stream]
   (with-open [is input-stream
               out (ByteArrayOutputStream.)]
     (io/copy is out)
