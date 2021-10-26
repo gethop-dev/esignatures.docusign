@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/magnetcoop/esignatures.docusign.svg?branch=master)](https://app.travis-ci.com/magnetcoop/esignatures.docusign)
+
 # esignatures.docusign
 
 A Library for interacting with the [Docusign eSignature API](https://developers.docusign.com/docs/esign-rest-api/) which optionally provides [Integrant](https://github.com/weavejester/integrant) initialization keys for the [Duct](https://github.com/duct-framework/duct) framework.
@@ -18,7 +20,7 @@ A Library for interacting with the [Docusign eSignature API](https://developers.
 
 ## Installation
 
-[![Clojars Project](https://clojars.org/magnet/esignatures.docusign/latest-version.svg)](https://clojars.org/magnet/esignatures.docusign)
+[![Clojars Project](https://img.shields.io/clojars/v/coop.magnet/esignatures.docusign.svg)](https://clojars.org/coop.magnet/esignatures.docusign)
 
 ## Usage
 
