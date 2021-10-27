@@ -164,12 +164,12 @@ Beware that these are only the minimal set of parameters needed to create an env
 An example of creating a sample envelope:
 
 ``` clojure
-coop.magnet.esignatures.docusign> (create-envelope ds-record {:documents [{:name "test"
-                                                                           :file-extension "pdf"
-                                                                           :stream test-file}]
-                                                              :signers [{:id "1"
-                                                                         :email "lucas.sousa@magnet.coop"
-                                                                         :name "Lucas Sousa"}]})
+user> (create-envelope ds-record {:documents [{:name "test"
+                                               :file-extension "pdf"
+                                               :stream test-file}]
+                                               :signers [{:id "1"
+                                                          :email "lucas.sousa@magnet.coop"
+                                                          :name "Lucas Sousa"}]})
 {:success? true, :id "98a4c44b-55e3-4694-8ebd-a438060471ba"}
 ```
 
@@ -188,7 +188,7 @@ The `get-envelope-signing-url` is multi arity method and you can provide an addi
 
 An example of getting a signing URL.
 ``` clojure
-magnet.esignatures.docusign> (get-envelope-signing-url ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba" {:id "1" :email "lucas.sousa@magnet.coop" :name "Lucas Sousa"} "http://localhost/mycallback")
+user> (get-envelope-signing-url ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba" {:id "1" :email "lucas.sousa@magnet.coop" :name "Lucas Sousa"} "http://localhost/mycallback")
 {:success? true,
  :url
  "https://demo.docusign.net/Signing/MTRedeem/v1/0af17550-f0c3-4bba-a43b-ea64f11bbea2?slt=eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQYAAAABAAMABwCA9BQqXpjZSAgAgJQmsX-Y2UgYAAEAAAAAAAAAIQCCAgAAeyJUb2tlbklkIjoiYzMyZjkwZDAtOGYyMy00MzZhLWFlNTctN2Q1MDgxZGRkZjAxIiwiRXhwaXJhdGlvbiI6IjIwMjEtMTAtMjZUMDg6NTk6MDUrMDA6MDAiLCJJc3N1ZWRBdCI6IjIwMjEtMTAtMjZUMDg6NTQ6MDUuMjMyMTQxOCswMDowMCIsIlJlc291cmNlSWQiOiI5OGE0YzQ0Yi01NWUzLTQ2OTQtOGViZC1hNDM4MDYwNDcxYmEiLCJSZXNvdXJjZXMiOiJ7XCJFbnZlbG9wZUlkXCI6XCI5OGE0YzQ0Yi01NWUzLTQ2OTQtOGViZC1hNDM4MDYwNDcxYmFcIixcIkFjdG9yVXNlcklkXCI6XCI2MjIzZjY3Yi05YzkxLTQ4NDgtOTFlYy0xNzE0NWJiNjQzMGNcIixcIlJlY2lwaWVudElkXCI6XCI0ZmM5NjIyMS0zNTczLTQwYjEtYTg1OC03MTgxYzc3MjU2MzBcIixcIkZha2VRdWVyeVN0cmluZ1wiOlwidD0xMmRjZTY4Ni03NDFlLTQ0OTItYjQxNC04NDI4MDY1NDQxNzdcIn0iLCJUb2tlblR5cGUiOjEsIkF1ZGllbmNlIjoiMjVlMDkzOTgtMDM0NC00OTBjLThlNTMtM2FiMmNhNTYyN2JmIiwiUmVkaXJlY3RVcmkiOiJodHRwczovL2RlbW8uZG9jdXNpZ24ubmV0L1NpZ25pbmcvU3RhcnRJblNlc3Npb24uYXNweCIsIkhhc2hBbGdvcml0aG0iOjAsIkhhc2hSb3VuZHMiOjAsIlRva2VuU3RhdHVzIjowLCJJc1NpbmdsZVVzZSI6ZmFsc2V9PwAAvEzcXpjZSA.uMF-mGM0cjIR38ysvA9NLXYX12xiQ5vknoWYQbJYDxvbERXhRNrfhsINgUFANBMRJJJKdRGCGqAW20QXpRmBh6e-RXLpq4hsj4O5D9XVgbeOJsZck_VJ2_yBqbPPNOUonb81Cyl9LOkJGCDPjab24c50G8w33dODUid2AEapR7iI2s6vKp6HCNSPjXTsDX_ghIQgKa1Q511N267BtUqMX6RPJbGQgzbx_dnIuT5JcQh5O7OCqHvxGjQy_LQBAClm2S7TGzmCy5D50xNZNJ6sDIAM3oBALbH3rEd2l3LQOaFMS4z1JtqtV8me1jXW0UzaoA370eUCtcsJDa5KKrUNSA"}
@@ -206,7 +206,7 @@ The `get-envelope-documents` is multi arity method and you can provide an additi
 An example of getting an envelops documents combined in a single PDF (which is the default behavior):
 
 ``` clojure
-magnet.esignatures.core> (get-envelope-documents ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba" {:documentId "combined"})
+user> (get-envelope-documents ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba" {:documentId "combined"})
 
 {:success? true,
  :documents
