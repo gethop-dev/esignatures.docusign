@@ -10,11 +10,11 @@
            [org.httpkit.client TimeoutException]))
 
 (def ^:const default-timeout
-  "Default timeout value for an connection attempt with Stripe API."
+  "Default timeout value for an connection attempt."
   5000)
 
 (def ^:const default-max-retries
-  "Default limit of attempts for Stripe request."
+  "Default limit of request attempts."
   10)
 
 (def ^:const default-initial-delay
