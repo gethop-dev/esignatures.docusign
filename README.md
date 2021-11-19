@@ -57,7 +57,7 @@ Basic configuration:
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
                   :private-key "DocuSign Application's Private RSA Key"}
-    :base-url "https://demo.docusign.com"
+    :base-url "https://demo.docusign.net"
     :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 ```
 
@@ -68,7 +68,7 @@ Configuration with custom request retry policy:
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
                   :private-key "DocuSign Application's Private RSA Key"}
-    :base-url "https://demo.docusign.com"
+    :base-url "https://demo.docusign.net"
     :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"
     :timeout 3000
     :max-retries 5
@@ -96,7 +96,7 @@ user> (def config :coop.magnet.esignatures/docusign
                                  :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                  :auth-service-uri "https://account-d.docusign.com"
                                  :private-key "DocuSign Application's Private RSA Key"}
-                   :base-url "https://demo.docusign.com"
+                   :base-url "https://demo.docusign.net"
                    :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"})
 #'user/config
 user>
@@ -120,7 +120,7 @@ user> ds-record
                                                          :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                                          :auth-service-uri "https://account-d.docusign.com"
                                                          :private-key "DocuSign Application's Private RSA Key"}
-                                           :base-url "https://demo.docusign.com"
+                                           :base-url "https://demo.docusign.net"
                                            :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 user>
 ```
@@ -133,14 +133,14 @@ user> (docusign/init-record {:auth-config {:integration-key "5ff3dade-dd8e-4da4-
                                                     :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                                     :auth-service-uri "https://account-d.docusign.com"
                                                     :private-key "DocuSign Application's Private RSA Key"}
-                             :base-url "https://demo.docusign.com"
+                             :base-url "https://demo.docusign.net"
                              :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"})
 
 #coop.magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                                                          :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                                          :auth-service-uri "https://account-d.docusign.com"
                                                          :private-key "DocuSign Application's Private RSA Key"}
-                                           :base-url "https://demo.docusign.com"
+                                           :base-url "https://demo.docusign.net"
                                            :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 ```
 
