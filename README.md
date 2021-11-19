@@ -167,9 +167,9 @@ An example of creating a sample envelope:
 user> (create-envelope ds-record {:documents [{:name "test"
                                                :file-extension "pdf"
                                                :stream test-file}]
-                                               :signers [{:id "1"
-                                                          :email "lucas.sousa@magnet.coop"
-                                                          :name "Lucas Sousa"}]})
+                                  :signers [{:id "1"
+                                             :email "lucas.sousa@magnet.coop"
+                                             :name "Lucas Sousa"}]})
 {:success? true, :id "98a4c44b-55e3-4694-8ebd-a438060471ba"}
 ```
 
