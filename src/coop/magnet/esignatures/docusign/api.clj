@@ -67,7 +67,6 @@
                             :headers {"Authorization" (str "Bearer " access-token)}
                             :body (merge api-envelope opts)}
                            retry-config)]
-      (prn body)
       (if (and (<= 200 status 299) (:envelopeId body))
         {:success? true :id (:envelopeId body)}
         {:success? false
