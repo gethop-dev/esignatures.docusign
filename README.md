@@ -173,6 +173,28 @@ user> (create-envelope ds-record {:documents [{:name "test"
 {:success? true, :id "98a4c44b-55e3-4694-8ebd-a438060471ba"}
 ```
 
+### Delete an Envelope
+
+Although the method is called 'delete' for consistency across
+different implementations of the `esignature` protocol, for this
+specific implementation it won't really delete the documents, but only mark
+them as `voided`. The additional `opts` can be used to specify the `voidedReason`.
+
+* `this`: The DocuSign record.
+* `:envelope-id`: The envelope ID.
+
+The `delete-envelope` is multi arity method and you can provide an
+additional parameter called `opts` which is a map with optional
+parameters.
+
+An example of deleting an envelope:
+
+``` clojure
+user> (delete-envelope ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba")
+
+{:success? true}
+```
+
 ### Get Envelope Signing URL
 
 To get an envelope signing URL the following parameters are mandatory:
