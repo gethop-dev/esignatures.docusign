@@ -67,7 +67,7 @@
                             :headers {"Authorization" (str "Bearer " access-token)}
                             :body (merge api-envelope opts)}
                            retry-config)]
-      (if (and (<= 200 status 299) (:envelopeId body))
+      (if (and (= status :ok) (:envelopeId body))
         {:success? true :id (:envelopeId body)}
         {:success? false
          :reason :request-failed
@@ -98,7 +98,7 @@
                             :headers {"Authorization" (str "Bearer " access-token)}
                             :body (merge view opts)}
                            retry-config)]
-      (if (and (<= 200 status 299) (:url body))
+      (if (and (= status :ok) (:url body))
         {:success? true :url (:url body)}
         {:success? false
          :reason :request-failed
@@ -116,7 +116,7 @@
                                          base-url account-id envelope-id mode)
                             :headers {"Authorization" (str "Bearer " access-token)}}
                            retry-config)]
-      (if (and (<= 200 status 299) body)
+      (if (and (= status :ok) body)
         {:success? true
          :documents body}
         {:success? false

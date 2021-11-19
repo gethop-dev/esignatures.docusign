@@ -30,28 +30,14 @@
 (def ^:const default-backoff-ms
   [default-initial-delay default-max-delay 2.0])
 
-(def ^:const gateway-timeout
-  "504 Gateway timeout The server, while acting as a gateway or proxy,
-  did not receive a timely response from the upstream server specified
-  by the URI (e.g. HTTP, FTP, LDAP) or some other auxiliary
-  server (e.g. DNS) it needed to access in attempting to complete the
-  request."
-  504)
-
-(def ^:const bad-gateway
-  "502 Bad gateway The server, while acting as a gateway or proxy,
-  received an invalid response from the upstream server it accessed in
-  attempting to fulfill the request."
-  502)
-
 (defn- fallback [_value exception]
   (let [status (condp instance? exception
                  ;; Socket layer related exceptions
                  java.net.UnknownHostException :unknown-host
                  java.net.ConnectException :connection-refused
                  ;; HTTP layer related exceptions
-                 org.httpkit.client.TimeoutException gateway-timeout
-                 org.httpkit.client.AbortException bad-gateway)]
+                 org.httpkit.client.TimeoutException :gateway-timeout
+                 org.httpkit.client.AbortException :bad-gateway)]
     {:status status}))
 
 (defn- retry-policy [max-retries backoff-ms]
@@ -62,11 +48,39 @@
                org.httpkit.client.AbortException]}))
 
 (defn- parse-response-body [{:keys [headers body]}]
-  (let [content-type (get headers :content-type)]
-    (if (and (re-find #"application/json" content-type)
-             (string? body))
-      (json/parse-string body true)
-      {:content-type content-type :content body})))
+  (try
+    (let [content-type (get headers :content-type)]
+      (if (and (re-find #"application/json" content-type)
+               (string? body))
+        (json/parse-string body true)
+        {:content-type content-type :content body}))
+    (catch Exception e
+      nil)))
+
+(defn- http-status-code->status [status-code]
+  (cond
+    (<= 200 status-code 299) :ok
+
+    (= 400 status-code) :bad-request
+    (= 401 status-code) :unauthorized
+    (= 403 status-code) :forbidden
+    (= 404 status-code) :not-found
+    (= 409 status-code) :conflict
+    (<= 400 status-code 499) :unknown-client-error
+
+    (= 500 status-code) :internal-server-error
+    (= 502 status-code) :bad-gateway
+    (= 504 status-code) :gateway-timeout
+    (<= 400 status-code 499) :unknown-server-error
+
+    :else :unknown))
+
+(defn parse-response [{:keys [status] :as request}]
+  (let [status (if (number? status)
+                 (http-status-code->status status)
+                 status)
+        body (parse-response-body request)]
+    {:status status :body body}))
 
 (defn do-request [request {:keys [timeout max-retries backoff-ms]
                            :or {timeout default-timeout
@@ -81,13 +95,9 @@
                      (assoc-in [:headers "Content-Type"] "application/json"))
                     :always
                     (assoc :timeout timeout))
-          {:keys [status error] :as request} @(http/request request)]
+          {:keys [status error] :as response} @(http/request request)]
       (when error
         (throw error))
       (when (= status 504)
         (throw (TimeoutException. "Server 504")))
-      (try
-        {:status status
-         :body (parse-response-body request)}
-        (catch Exception e
-          {:status bad-gateway})))))
+      (parse-response response))))
