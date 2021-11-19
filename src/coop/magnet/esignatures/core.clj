@@ -43,8 +43,17 @@
 (s/def ::get-envelope-signing-url-ret (s/keys :req-un [::success?]
                                               :opt-un [::envelope-id]))
 
+(s/def ::delete-envelope-opts map?)
+(s/def ::delete-envelopeg-url-args (s/cat :config record?
+                                          :envelope-id ::envelope-id
+                                          :opts (s/? ::delete-envelope-signing-url-opts)))
+(s/def ::delete-envelope-url-ret (s/keys :req-un [::success?]))
+
 (defprotocol ESignature
   (create-envelope
+    [this envelope]
+    [this envelope opts])
+  (delete-envelope
     [this envelope]
     [this envelope opts])
   (get-envelope-signing-url

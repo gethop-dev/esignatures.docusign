@@ -75,6 +75,34 @@
     {:success? false
      :reason :could-not-get-access-token}))
 
+(s/fdef delete-signing-url
+  :args ::core/delete-envelope-signing-url-args
+  :ret  ::core/delete-envelope-signing-url-ret)
+
+(defn delete-envelope
+  [{:keys [base-url account-id retry-config] :as adapter} envelope-id opts]
+  {:pre [(s/valid? ::core/envelope-id envelope-id)
+         (s/valid? ::core/delete-envelope-opts opts)]}
+  (if-let [access-token (oauth/get-access-token adapter)]
+    (let [{:keys [status body]}
+          (util/do-request {:method :put
+                            :url (format "%s/restapi/v2.1/accounts/%s/envelopes/%s"
+                                         base-url account-id envelope-id)
+                            :headers {"Authorization" (str "Bearer " access-token)}
+                            :body (merge
+                                   {:status "voided"
+                                    :voidedReason  "API delete"}
+                                   opts)}
+                           retry-config)]
+      (if (= status :ok)
+        {:success? true}
+        {:success? false
+         :reason :request-failed
+         :error-details {:status status
+                         :body body}}))
+    {:success? false
+     :reason :could-not-get-access-token}))
+
 (s/fdef get-signing-url
   :args ::core/get-envelope-signing-url-args
   :ret  ::core/get-envelope-signing-url-ret)
@@ -131,6 +159,10 @@
     (create-envelope this envelope {}))
   (create-envelope [this envelope opts]
     (create-envelope this envelope opts))
+  (delete-envelope [this envelope-id]
+    (delete-envelope this envelope-id {}))
+  (delete-envelope [this envelope-id opts]
+    (delete-envelope this envelope-id opts))
   (get-envelope-signing-url [this envelope-id signer return-url]
     (get-envelope-signing-url this envelope-id signer return-url {}))
   (get-envelope-signing-url [this envelope-id signer return-url opts]
