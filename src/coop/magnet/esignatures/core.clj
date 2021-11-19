@@ -44,10 +44,10 @@
                                               :opt-un [::envelope-id]))
 
 (s/def ::delete-envelope-opts map?)
-(s/def ::delete-envelopeg-url-args (s/cat :config record?
-                                          :envelope-id ::envelope-id
-                                          :opts (s/? ::delete-envelope-signing-url-opts)))
-(s/def ::delete-envelope-url-ret (s/keys :req-un [::success?]))
+(s/def ::delete-envelope-args (s/cat :config record?
+                                     :envelope-id ::envelope-id
+                                     :opts (s/? ::delete-envelope-opts)))
+(s/def ::delete-envelope-ret (s/keys :req-un [::success?]))
 
 (defprotocol ESignature
   (create-envelope

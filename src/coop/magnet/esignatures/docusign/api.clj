@@ -75,9 +75,9 @@
     {:success? false
      :reason :could-not-get-access-token}))
 
-(s/fdef delete-signing-url
-  :args ::core/delete-envelope-signing-url-args
-  :ret  ::core/delete-envelope-signing-url-ret)
+(s/fdef delete-envelope
+  :args ::core/delete-envelope-args
+  :ret  ::core/delete-envelope-ret)
 
 (defn delete-envelope
   [{:keys [base-url account-id retry-config] :as adapter} envelope-id opts]
