@@ -12,5 +12,5 @@
       (update-in [:auth-config :private-key] oauth/load-private-key)
       (api/map->DocuSign)))
 
-(defmethod ig/init-key :coop.magnet.esignature/docusign [_ config]
+(defmethod ig/init-key :coop.magnet.esignatures/docusign [_ config]
   (init-record config))
