@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [0.1.3] - 2021-11-23
+
+## Fixed
+- Fix function for validating the webhook signatures. A step was
+  missing so the result of the check was always 'false'.
+
+## Added
+- Add 'valid-headers?' helper function for validating all webhook
+  signatures at one step. The function will return 'true' if at least
+  one matching signature is found.
+
 ## [0.1.2] - 2021-11-19
 
 ## Added
