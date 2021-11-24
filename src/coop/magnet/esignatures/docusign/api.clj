@@ -37,12 +37,12 @@
        (add-ids :documentId)))
 
 (defn- signer->api-signer [signer]
-  (set/rename-keys signer {:id :clientUserId}))
+  (-> signer
+      (assoc :recipientId (:id signer))
+      (set/rename-keys {:id :clientUserId})))
 
 (defn- signers->api-signers [signers]
-  (->> signers
-       (map signer->api-signer)
-       (add-ids :recipientId)))
+  (map signer->api-signer signers))
 
 (defn- envelope->api-envelope
   [{:keys [documents signers]}]
