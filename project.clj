@@ -1,4 +1,4 @@
-(defproject dev.gethop/esignatures.docusign "0.1.5-SNAPSHOT"
+(defproject dev.gethop/esignatures.docusign "0.1.5"
   :description "A library for interacting with the DocuSign eSignature API"
   :url "https://github.com/gethop-dev/esignatures.docusign"
   :license {:name "Mozilla Public License 2.0"

@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.1.5] - 2022-05-23
+## Changed
+- Moving the repository to [gethop-dev](https://github.com/gethop-dev) organization
+- CI/CD solution switch from [TravisCI](https://travis-ci.org/) to [GitHub Actions](Ihttps://github.com/features/actions)
+- `eastwood` dependency bump
+- update this changelog's releases tags links
+
+### Added
+- Source code linting using [clj-kondo](https://github.com/clj-kondo/clj-kondo)
+
 ## [0.1.4] - 2021-11-24
 ## Changed
 - When creating a new envelope, use the signer `id` provided in the
@@ -47,7 +57,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Initial version of the library.
 
 
-[Unreleased]: https://github.com/gethop-dev/esignatures.docusign/compare/0.1.4...HEAD
+[Unreleased]: https://github.com/gethop-dev/esignatures.docusign/compare/0.1.5...HEAD
+[0.1.5]: https://github.com/gethop-dev/esignatures.docusign/releases/tag/v0.1.5
 [0.1.4]: https://github.com/gethop-dev/esignatures.docusign/releases/tag/v0.1.4
 [0.1.3]: https://github.com/gethop-dev/esignatures.docusign/releases/tag/v0.1.3
 [0.1.2]: https://github.com/gethop-dev/esignatures.docusign/releases/tag/v0.1.2

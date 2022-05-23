@@ -1,4 +1,5 @@
-[![Build Status](https://app.travis-ci.com/magnetcoop/esignatures.docusign.svg?branch=master)](https://app.travis-ci.com/magnetcoop/esignatures.docusign)
+[![ci-cd](https://github.com/gethop-dev/esignatures.docusign/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/gethop-dev/esignatures.docusign/actions/workflows/ci-cd.yml)
+[![Clojars Project](https://img.shields.io/clojars/v/dev.gethop/esignatures.docusign.svg)](https://clojars.org/dev.gethop/esignatures.docusign)
 
 # esignatures.docusign
 
@@ -20,7 +21,7 @@ A Library for interacting with the [Docusign eSignature API](https://developers.
 
 ## Installation
 
-[![Clojars Project](https://img.shields.io/clojars/v/coop.magnet/esignatures.docusign.svg)](https://clojars.org/coop.magnet/esignatures.docusign)
+[![Clojars Project](https://clojars.org/dev.gethop/esignatures.docusign/latest-version.svg)](https://clojars.org/dev.gethop/esignatures.docusign)
 
 ## Usage
 
@@ -239,6 +240,6 @@ user> (get-envelope-documents ds-record "98a4c44b-55e3-4694-8ebd-a438060471ba" {
 
 ## License
 
-Copyright (c) 2021 Magnet S Coop.
+Copyright (c) 2022 HOP Technologies
 
 The source code for the library is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
