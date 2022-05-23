@@ -2,10 +2,10 @@
 ;; License, v. 2.0. If a copy of the MPL was not distributed with this
 ;; file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-(ns coop.magnet.esignatures.docusign.oauth
+(ns dev.gethop.esignatures.docusign.oauth
   (:require [buddy.sign.jwt :as jwt]
             [clojure.string :as str]
-            [coop.magnet.esignatures.util :as util])
+            [dev.gethop.esignatures.util :as util])
   (:import [java.lang String]
            [java.security KeyFactory]
            [java.security.spec PKCS8EncodedKeySpec]

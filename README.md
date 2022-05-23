@@ -28,7 +28,7 @@ A Library for interacting with the [Docusign eSignature API](https://developers.
 
 To use this library add the following key to your configuration:
 
-`:coop.magnet.esignatures/docusign`
+`:dev.gethop.esignatures/docusign`
 
 This key expects a configuration map with two mandatory keys
 These are the mandatory keys:
@@ -52,7 +52,7 @@ Key initialization returns a `DocuSign` record that can be used to perform the D
 
 Basic configuration:
 ```edn
-  :coop.magnet.esignatures/docusign
+  :dev.gethop.esignatures/docusign
    {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
@@ -63,7 +63,7 @@ Basic configuration:
 
 Configuration with custom request retry policy:
 ```edn
-  :coop.magnet.esignatures/docusign
+  :dev.gethop.esignatures/docusign
    {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                   :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                   :auth-service-uri "https://account-d.docusign.com"
@@ -91,7 +91,7 @@ user>
 Next we create the configuration var holding the DocuSign integration configuration details:
 
 ```clj
-user> (def config :coop.magnet.esignatures/docusign
+user> (def config :dev.gethop.esignatures/docusign
                   {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                                  :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                  :auth-service-uri "https://account-d.docusign.com"
@@ -102,10 +102,10 @@ user> (def config :coop.magnet.esignatures/docusign
 user>
 ```
 
-Now that we have all pieces in place, we can initialize the `:coop.magnet.esignature/docusign` Integrant key to get a `DocuSign` record. As we are doing all this from the REPL, we have to manually require `magnet.esignature.docusign` namespace, where the `init-key` multimethod for that key is defined (this is not needed when Duct takes care of initializing the key as part of the application start up):
+Now that we have all pieces in place, we can initialize the `:dev.gethop.esignature/docusign` Integrant key to get a `DocuSign` record. As we are doing all this from the REPL, we have to manually require `dev.gethop.esignature.docusign` namespace, where the `init-key` multimethod for that key is defined (this is not needed when Duct takes care of initializing the key as part of the application start up):
 
 ``` clj
-user> (require '[coop.magnet.esignatures.docusign :as docusign])
+user> (require '[dev.gethop.esignatures.docusign :as docusign])
 nil
 user>
 ```
@@ -113,22 +113,22 @@ user>
 And we finally initialize the key with the configuration defined above, to get our `DocuSign` record:
 
 ``` clj
-user> (def ds-record (ig/init-key :coop.magnet.esignatures/docusign config))
+user> (def ds-record (ig/init-key :dev.gethop.esignatures/docusign config))
 #'user/ds-record
 user> ds-record
-#coop.magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
-                                                         :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
-                                                         :auth-service-uri "https://account-d.docusign.com"
-                                                         :private-key "DocuSign Application's Private RSA Key"}
-                                           :base-url "https://demo.docusign.net"
-                                           :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
+#dev.gethop.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
+                                                        :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
+                                                        :auth-service-uri "https://account-d.docusign.com"
+                                                        :private-key "DocuSign Application's Private RSA Key"}
+                                          :base-url "https://demo.docusign.net"
+                                          :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 user>
 ```
 
 #### Not using Duct
 
 ```clj
-user> (require '[coop.magnet.esignatures.docusign :as docusign])
+user> (require '[dev.gethop.esignatures.docusign :as docusign])
 user> (docusign/init-record {:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
                                                     :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
                                                     :auth-service-uri "https://account-d.docusign.com"
@@ -136,15 +136,15 @@ user> (docusign/init-record {:auth-config {:integration-key "5ff3dade-dd8e-4da4-
                              :base-url "https://demo.docusign.net"
                              :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"})
 
-#coop.magnet.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
-                                                         :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
-                                                         :auth-service-uri "https://account-d.docusign.com"
-                                                         :private-key "DocuSign Application's Private RSA Key"}
-                                           :base-url "https://demo.docusign.net"
-                                           :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
+#dev.gethop.esignatures.docusign.DocuSign{:auth-config {:integration-key "5ff3dade-dd8e-4da4-a29e-f0463120a57f"
+                                                        :user-id "3e2a655b-7d95-447b-ba26-e5b6c896fe66"
+                                                        :auth-service-uri "https://account-d.docusign.com"
+                                                        :private-key "DocuSign Application's Private RSA Key"}
+                                          :base-url "https://demo.docusign.net"
+                                          :account-id "ea1b567f-dd03-41bf-a916-64ec174c8bb6"}
 ```
 
-Now that we have our `DocuSign` record, we are ready to use the methods defined by the protocols defined in `magnet.esignatures.core` namespace.
+Now that we have our `DocuSign` record, we are ready to use the methods defined by the protocols defined in `dev.gethop.esignatures.core` namespace.
 
 ### Creating an envelope
 

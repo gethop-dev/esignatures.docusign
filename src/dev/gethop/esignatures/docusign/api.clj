@@ -2,13 +2,13 @@
 ;; License, v. 2.0. If a copy of the MPL was not distributed with this
 ;; file, You can obtain one at http://mozilla.org/MPL/2.0/
 
-(ns coop.magnet.esignatures.docusign.api
+(ns dev.gethop.esignatures.docusign.api
   (:require [clojure.java.io :as io]
             [clojure.set :as set]
             [clojure.spec.alpha :as s]
-            [coop.magnet.esignatures.core :as core]
-            [coop.magnet.esignatures.docusign.oauth :as oauth]
-            [coop.magnet.esignatures.util :as util])
+            [dev.gethop.esignatures.core :as core]
+            [dev.gethop.esignatures.docusign.oauth :as oauth]
+            [dev.gethop.esignatures.util :as util])
   (:import [java.io ByteArrayOutputStream]
            [java.io BufferedInputStream]
            [java.util Base64]))
