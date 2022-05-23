@@ -18,8 +18,9 @@
                                       :sign-releases false}]]
   :profiles {:dev [:project/dev :profiles/dev]
              :profiles/dev {}
-             :project/dev {:plugins [[jonase/eastwood "0.9.9"]
+             :project/dev {:plugins [[jonase/eastwood "1.2.3"]
                                      [lein-cljfmt "0.8.0"]]}
              :repl {:repl-options {:init-ns dev.gethop.esignatures.core
                                    :host "0.0.0.0"
-                                   :port 4001}}})
+                                   :port 4001}}
+             :eastwood {:linters [:all]}})

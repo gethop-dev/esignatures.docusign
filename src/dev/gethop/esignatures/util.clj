@@ -54,7 +54,7 @@
                (string? body))
         (json/parse-string body true)
         {:content-type content-type :content body}))
-    (catch Exception e
+    (catch Exception _
       nil)))
 
 (defn- http-status-code->status [status-code]
